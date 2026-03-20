@@ -21,6 +21,7 @@ readonly class Commit
         public string $url,
         public ?string $authorEmail = null,
         public bool $hasDependenciesChanges = false,
+        public ?string $message = null,
     ) {
     }
 
@@ -34,6 +35,7 @@ readonly class Commit
             $this->url,
             $this->authorEmail,
             $hasDependenciesChanges,
+            $this->message,
         );
     }
 }

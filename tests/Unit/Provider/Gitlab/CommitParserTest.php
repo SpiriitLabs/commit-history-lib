@@ -30,6 +30,7 @@ class CommitParserTest extends TestCase
         $data = [
             'id' => 'abc123456789',
             'title' => 'Fix critical bug in parser',
+            'message' => "Fix critical bug in parser\n\nThis is the extended description.",
             'created_at' => '2024-01-15T10:30:00Z',
             'author_name' => 'John Doe',
             'author_email' => 'john@example.com',
@@ -44,6 +45,7 @@ class CommitParserTest extends TestCase
         $this->assertSame('john@example.com', $commit->authorEmail);
         $this->assertSame('https://gitlab.com/org/repo/-/commit/abc123456789', $commit->url);
         $this->assertSame('2024-01-15', $commit->date->format('Y-m-d'));
+        $this->assertSame("Fix critical bug in parser\n\nThis is the extended description.", $commit->message);
     }
 
     public function testParseTruncatesIdToEightCharacters(): void

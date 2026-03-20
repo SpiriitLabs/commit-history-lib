@@ -30,6 +30,7 @@ class CommitTest extends TestCase
             url: 'https://github.com/org/repo/commit/abc12345',
             authorEmail: 'john@example.com',
             hasDependenciesChanges: true,
+            message: "Fix bug in parser\n\nExtended description.",
         );
 
         $this->assertSame('abc12345', $commit->id);
@@ -39,6 +40,7 @@ class CommitTest extends TestCase
         $this->assertSame('https://github.com/org/repo/commit/abc12345', $commit->url);
         $this->assertSame('john@example.com', $commit->authorEmail);
         $this->assertTrue($commit->hasDependenciesChanges);
+        $this->assertSame("Fix bug in parser\n\nExtended description.", $commit->message);
     }
 
     public function testDefaultValues(): void
@@ -53,6 +55,7 @@ class CommitTest extends TestCase
 
         $this->assertNull($commit->authorEmail);
         $this->assertFalse($commit->hasDependenciesChanges);
+        $this->assertNull($commit->message);
     }
 
     public function testWithHasDependenciesChangesReturnsNewInstance(): void
@@ -66,6 +69,7 @@ class CommitTest extends TestCase
             url: 'https://example.com',
             authorEmail: 'jane@example.com',
             hasDependenciesChanges: false,
+            message: "Some commit\n\nDetails.",
         );
 
         $newCommit = $commit->withHasDependenciesChanges(true);
@@ -79,5 +83,6 @@ class CommitTest extends TestCase
         $this->assertSame($commit->author, $newCommit->author);
         $this->assertSame($commit->url, $newCommit->url);
         $this->assertSame($commit->authorEmail, $newCommit->authorEmail);
+        $this->assertSame($commit->message, $newCommit->message);
     }
 }
