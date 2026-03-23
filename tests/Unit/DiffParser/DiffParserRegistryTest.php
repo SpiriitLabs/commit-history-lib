@@ -127,13 +127,13 @@ class DiffParserRegistryTest extends TestCase
 
         $composerParser = $this->createMock(DiffParserInterface::class);
         $composerParser->method('supports')
-            ->willReturnCallback(fn (string $f) => 'composer.json' === $f);
+            ->willReturnCallback(static fn (string $f) => 'composer.json' === $f);
         $composerParser->method('parse')
             ->willReturn([$composerChange]);
 
         $packageParser = $this->createMock(DiffParserInterface::class);
         $packageParser->method('supports')
-            ->willReturnCallback(fn (string $f) => 'package.json' === $f);
+            ->willReturnCallback(static fn (string $f) => 'package.json' === $f);
         $packageParser->method('parse')
             ->willReturn([$packageChange]);
 
@@ -148,7 +148,7 @@ class DiffParserRegistryTest extends TestCase
 
         $this->assertCount(2, $changes);
 
-        $names = array_map(fn ($c) => $c->name, $changes);
+        $names = array_map(static fn ($c) => $c->name, $changes);
         $this->assertContains('symfony/http-client', $names);
         $this->assertContains('lodash', $names);
     }
@@ -162,7 +162,7 @@ class DiffParserRegistryTest extends TestCase
 
         $composerParser = $this->createMock(DiffParserInterface::class);
         $composerParser->method('supports')
-            ->willReturnCallback(fn (string $f) => 'composer.json' === $f);
+            ->willReturnCallback(static fn (string $f) => 'composer.json' === $f);
         $composerParser->method('parse')
             ->willReturn([$composerChange]);
 

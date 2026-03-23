@@ -33,7 +33,7 @@ class CommitParser implements CommitParserInterface
             author: (string) ($authorData['name'] ?? ''),
             url: (string) ($data['html_url'] ?? ''),
             authorEmail: $authorData['email'] ?? null,
-            message: $message !== '' ? $message : null,
+            message: '' !== $message ? $message : null,
         );
     }
 
