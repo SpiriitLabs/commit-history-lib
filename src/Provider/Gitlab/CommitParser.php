@@ -28,6 +28,7 @@ class CommitParser implements CommitParserInterface
             author: (string) $data['author_name'],
             url: (string) $data['web_url'],
             authorEmail: $data['author_email'] ?? null,
+            message: isset($data['message']) ? (string) $data['message'] : null,
         );
     }
 }

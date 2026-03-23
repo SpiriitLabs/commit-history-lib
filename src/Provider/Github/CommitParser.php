@@ -24,13 +24,16 @@ class CommitParser implements CommitParserInterface
         $commitData = $data['commit'] ?? [];
         $authorData = $commitData['author'] ?? [];
 
+        $message = (string) ($commitData['message'] ?? '');
+
         return new Commit(
             id: substr((string) $data['sha'], 0, 8),
-            title: $this->extractTitle((string) ($commitData['message'] ?? '')),
+            title: $this->extractTitle($message),
             date: new \DateTimeImmutable((string) ($authorData['date'] ?? 'now')),
             author: (string) ($authorData['name'] ?? ''),
             url: (string) ($data['html_url'] ?? ''),
             authorEmail: $authorData['email'] ?? null,
+            message: '' !== $message ? $message : null,
         );
     }
 

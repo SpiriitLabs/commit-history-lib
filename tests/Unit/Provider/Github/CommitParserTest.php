@@ -48,6 +48,7 @@ class CommitParserTest extends TestCase
         $this->assertSame('john@example.com', $commit->authorEmail);
         $this->assertSame('https://github.com/org/repo/commit/abc123456789', $commit->url);
         $this->assertSame('2024-01-15', $commit->date->format('Y-m-d'));
+        $this->assertSame("Fix critical bug in parser\n\nThis is the extended description.", $commit->message);
     }
 
     public function testParseExtractsFirstLineAsTitle(): void
